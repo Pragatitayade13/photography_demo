@@ -11,11 +11,11 @@ import {
 export const enquiryService = {
   // Public Submission
   async submitEnquiry(data: CreateEnquiryDTO): Promise<{ reference_number: string; message: string }> {
-    const res = await apiClient.post<{ reference_number: string; message: string }>(
+    const res = await apiClient.post<any>(
       "/contact/enquiries",
       data
     );
-    return res.data;
+    return res.data?.data || res.data;
   },
 
   // Admin Inquiries
@@ -25,41 +25,52 @@ export const enquiryService = {
     enquiry_type?: string;
     search?: string;
   }): Promise<{ enquiries: EnquiryItem[]; stats: EnquiryStats }> {
-    const res = await apiClient.get<{ enquiries: EnquiryItem[]; stats: EnquiryStats }>(
+    const res = await apiClient.get<any>(
       "/contact/admin/enquiries",
       { params }
     );
-    return res.data;
+    const payload = res.data?.data || res.data || {};
+    return {
+      enquiries: payload.enquiries || [],
+      stats: payload.stats || { total: 0, new: 0, in_discussion: 0, confirmed: 0 },
+    };
   },
 
   async getEnquiry(id: string): Promise<{ enquiry: EnquiryItem; activity: EnquiryActivity[] }> {
-    const res = await apiClient.get<{ enquiry: EnquiryItem; activity: EnquiryActivity[] }>(
+    const res = await apiClient.get<any>(
       `/contact/admin/enquiries/${id}`
     );
-    return res.data;
+    const payload = res.data?.data || res.data || {};
+    return {
+      enquiry: payload.enquiry || payload,
+      activity: payload.activity || [],
+    };
   },
 
   async updateStatus(id: string, status: EnquiryStatus): Promise<EnquiryItem> {
-    const res = await apiClient.patch<EnquiryItem>(
+    const res = await apiClient.patch<any>(
       `/contact/admin/enquiries/${id}/status`,
       { status }
     );
-    return res.data;
+    const payload = res.data?.data || res.data;
+    return payload?.enquiry || payload;
   },
 
   async updatePriority(id: string, priority: EnquiryPriority): Promise<EnquiryItem> {
-    const res = await apiClient.patch<EnquiryItem>(
+    const res = await apiClient.patch<any>(
       `/contact/admin/enquiries/${id}/priority`,
       { priority }
     );
-    return res.data;
+    const payload = res.data?.data || res.data;
+    return payload?.enquiry || payload;
   },
 
   async addNote(id: string, notes: string): Promise<EnquiryItem> {
-    const res = await apiClient.post<EnquiryItem>(
+    const res = await apiClient.post<any>(
       `/contact/admin/enquiries/${id}/notes`,
       { notes }
     );
-    return res.data;
+    const payload = res.data?.data || res.data;
+    return payload?.enquiry || payload;
   },
 };

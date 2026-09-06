@@ -98,19 +98,19 @@ export const InquiriesView: React.FC = () => {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="p-5 rounded-xl bg-surface border border-surface-border space-y-1">
           <p className="text-[10px] uppercase tracking-widest text-secondary font-medium">Total Inquiries</p>
-          <p className="text-2xl font-sans font-semibold text-primary">{stats.total}</p>
+          <p className="text-2xl font-sans font-semibold text-primary">{stats?.total ?? 0}</p>
         </div>
         <div className="p-5 rounded-xl bg-surface border border-surface-border space-y-1">
           <p className="text-[10px] uppercase tracking-widest text-accent font-medium">New Requests</p>
-          <p className="text-2xl font-sans font-semibold text-accent">{stats.new}</p>
+          <p className="text-2xl font-sans font-semibold text-accent">{stats?.new ?? 0}</p>
         </div>
         <div className="p-5 rounded-xl bg-surface border border-surface-border space-y-1">
           <p className="text-[10px] uppercase tracking-widest text-amber-400 font-medium">In Discussion</p>
-          <p className="text-2xl font-sans font-semibold text-amber-400">{stats.in_discussion}</p>
+          <p className="text-2xl font-sans font-semibold text-amber-400">{stats?.in_discussion ?? 0}</p>
         </div>
         <div className="p-5 rounded-xl bg-surface border border-surface-border space-y-1">
           <p className="text-[10px] uppercase tracking-widest text-emerald-400 font-medium">Confirmed Bookings</p>
-          <p className="text-2xl font-sans font-semibold text-emerald-400">{stats.confirmed}</p>
+          <p className="text-2xl font-sans font-semibold text-emerald-400">{stats?.confirmed ?? 0}</p>
         </div>
       </div>
 

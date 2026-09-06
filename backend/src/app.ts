@@ -52,7 +52,8 @@ app.use(sanitizeInput);
 
 // Specific Endpoint Rate Limiting
 app.use("/api/v1/auth/login", authLimiter);
-app.use("/api/v1/contact", enquiryLimiter);
+app.use("/api/v1/contact/enquiries", enquiryLimiter);
+app.use("/api/v1/public/enquiries", enquiryLimiter);
 app.use("/api/v1", publicApiLimiter);
 
 // Serve static uploads
