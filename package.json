@@ -1,0 +1,24 @@
+{
+  "name": "photography-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium Photography Showcase & CMS Platform",
+  "scripts": {
+    "dev": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build"
+  },
+  "keywords": [
+    "photography",
+    "portfolio",
+    "cms",
+    "express",
+    "react",
+    "typescript"
+  ],
+  "author": "Photography Showcase Platform",
+  "license": "UNLICENSED"
+}
